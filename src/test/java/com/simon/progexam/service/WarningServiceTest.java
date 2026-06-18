@@ -36,7 +36,7 @@ class WarningServiceTest {
         Reading reading = new Reading();
         reading.setSensor(sensor);
         reading.setEstimatedMagnitude(magnitude);
-        reading.setEstimatedDistance(100.0);
+        reading.setEstimatedDistanceToEpicenterKm(100.0);
         return reading;
     }
 

@@ -61,7 +61,7 @@ class EpicenterCalculatorTest {
     private Reading buildReading(Sensor sensor, double distance) {
         Reading reading = new Reading();
         reading.setSensor(sensor);
-        reading.setEstimatedDistance(distance);
+        reading.setEstimatedDistanceToEpicenterKm(distance);
         reading.setEstimatedMagnitude(4.0);
         return reading;
     }

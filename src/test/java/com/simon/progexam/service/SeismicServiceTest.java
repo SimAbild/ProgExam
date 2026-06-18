@@ -49,13 +49,13 @@ class SeismicServiceTest {
 
     @BeforeEach
     void setUp() {
-        when(sensorRepository.save(any(Sensor.class))).thenAnswer(i -> i.getArgument(0));
         when(readingRepository.save(any(Reading.class))).thenAnswer(i -> i.getArgument(0));
     }
 
     @Test
     void processReadings_savesNewSensor_whenSensorNotFound() {
         when(sensorRepository.findBySensorId("s1")).thenReturn(Optional.empty());
+        when(sensorRepository.save(any(Sensor.class))).thenAnswer(i -> i.getArgument(0));
 
         seismicService.processReadings(List.of(buildDto("s1")));
 
@@ -76,6 +76,7 @@ class SeismicServiceTest {
     @Test
     void processReadings_savesReading_forEachDto() {
         when(sensorRepository.findBySensorId(any())).thenReturn(Optional.empty());
+        when(sensorRepository.save(any(Sensor.class))).thenAnswer(i -> i.getArgument(0));
 
         seismicService.processReadings(List.of(buildDto("s1"), buildDto("s2")));
 
@@ -85,6 +86,7 @@ class SeismicServiceTest {
     @Test
     void processReadings_createsWarning_whenExactlyThreeReadings() {
         when(sensorRepository.findBySensorId(any())).thenReturn(Optional.empty());
+        when(sensorRepository.save(any(Sensor.class))).thenAnswer(i -> i.getArgument(0));
 
         seismicService.processReadings(List.of(buildDto("s1"), buildDto("s2"), buildDto("s3")));
 
@@ -94,6 +96,7 @@ class SeismicServiceTest {
     @Test
     void processReadings_doesNotCreateWarning_whenFewerThanThreeReadings() {
         when(sensorRepository.findBySensorId(any())).thenReturn(Optional.empty());
+        when(sensorRepository.save(any(Sensor.class))).thenAnswer(i -> i.getArgument(0));
 
         seismicService.processReadings(List.of(buildDto("s1"), buildDto("s2")));
 

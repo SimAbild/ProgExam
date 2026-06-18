@@ -16,7 +16,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/sensor-data", "/h2-console/**").permitAll()
+                        .requestMatchers("/api/sensor-data", "/h2-console/**","/api/").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();

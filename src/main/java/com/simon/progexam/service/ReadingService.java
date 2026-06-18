@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+// Ansvar: Håndterer forespørgsler på sensormålinger til visning
 @Service
 @RequiredArgsConstructor
 public class ReadingService {
@@ -17,9 +18,7 @@ public class ReadingService {
 
     public List<ReadingResponseDTO> findReadings(){
         List<Reading> readings = readingRepository.findAll();
-        List<ReadingResponseDTO> ReadingResponseDtos = new ArrayList<>();
-
-        //for loop, for alle readings i findall, loop over og map dem i en repsonseDTO
+        List<ReadingResponseDTO> readingResponseDtos = new ArrayList<>();
 
         for (Reading reading : readings){
             ReadingResponseDTO readingResponseDTO = new ReadingResponseDTO();
@@ -29,8 +28,9 @@ public class ReadingService {
             readingResponseDTO.setEstimatedMagnitude(reading.getEstimatedMagnitude());
             readingResponseDTO.setRecordedAt(reading.getRecordedAt());
 
-           ReadingResponseDtos.add(readingResponseDTO);
+           readingResponseDtos.add(readingResponseDTO);
         }
+        return readingResponseDtos;
 
     }
 
