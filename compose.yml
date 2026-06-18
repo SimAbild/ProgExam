@@ -3,6 +3,6 @@ services:
     image: ghcr.io/osman-butt/exam-seismic-simulator:latest
     environment:
       STUDENT_APP_BASE_URL: "http://host.docker.internal:8080"
-  # SIMULATOR_INTERVAL_MS: 15000
+    # SIMULATOR_INTERVAL_MS: 15000
     extra_hosts:
-    - "host.docker.internal:host-gateway"
+      - "host.docker.internal:host-gateway"
