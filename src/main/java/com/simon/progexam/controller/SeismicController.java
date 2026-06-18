@@ -24,7 +24,7 @@ public class SeismicController {
         return ResponseEntity.ok("Readings processed");
     }
 
-    @GetMapping("/sensor-data")
+    @GetMapping("/sensor-reading-data")
     public List<ReadingResponseDTO> getAllReadings(){
         List<ReadingResponseDTO> readings = readingService.findReadings();
         return readings;

@@ -27,6 +27,7 @@ public class SecurityConfig {
                         // Offentlige endpoints
                         .requestMatchers("/api/sensor-data").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/", "/index.html", "/js/**", "/css/**").permitAll()
 
                         // USER endpoints
                         .requestMatchers("/api/warnings/active").hasAnyRole("USER", "ADMIN")
@@ -38,11 +39,17 @@ public class SecurityConfig {
                         .requestMatchers("/api/warnings/*/status").hasRole("ADMIN")
                         .requestMatchers("/api/warnings/*/reports/count").hasRole("ADMIN")
                         .requestMatchers("/api/warnings/*/readings").hasRole("ADMIN")
+                        .requestMatchers("/api/warnings/reports").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/warnings/*/reports").hasAnyRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )
-                .httpBasic(httpBasic -> {});
+                .httpBasic(httpBasic -> httpBasic
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.sendError(401);
+                        })
+                );
+
         return http.build();
     }
 

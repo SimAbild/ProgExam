@@ -16,7 +16,6 @@ import java.util.List;
 public class CitizenReportService {
 
     private final CitizenReportRepository citizenReportRepository;
-    private final EarthquakeWarningRepository earthquakeWarningRepository;
 
     public CitizenReport createCitizenReport(double intensity, EarthquakeWarning earthquakeWarning){
         CitizenReport citizenReport = new CitizenReport();
@@ -35,6 +34,10 @@ public class CitizenReportService {
     public List<CitizenReport> showCitizenReportsBySpecificEarthquakeWarning(EarthquakeWarning earthquakeWarning){
 
         return citizenReportRepository.findByEarthquakeWarning(earthquakeWarning);
+    }
+
+    public List<CitizenReport> getAllCitizenReports(){
+        return citizenReportRepository.findAll();
     }
 
 }

@@ -66,4 +66,13 @@ public class EarthquakeWarningController {
        EarthquakeWarning earthquakeWarning = earthquakeWarningService.findEarthquakeWarningById(id);
         return readingService.findAllReadingsBySpecificEarthquakeWarning(earthquakeWarning);
     }
+
+    @GetMapping("/warnings/reports")
+    public List<CitizenReport> showAllCitizenReports(){
+        List<CitizenReport> citizenReport = citizenReportService.getAllCitizenReports();
+        return citizenReport;
+
+    }
 }
+
+
