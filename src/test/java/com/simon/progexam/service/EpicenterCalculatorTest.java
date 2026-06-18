@@ -15,7 +15,7 @@ class EpicenterCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        epicenterCalculator = new EpicenterCalculator();
+        epicenterCalculator = new EpicenterCalculatorImpl();
     }
 
     @Test
