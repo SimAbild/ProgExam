@@ -4,7 +4,6 @@ import com.simon.progexam.DTO.ReadingResponseDTO;
 import com.simon.progexam.entity.EarthquakeWarning;
 import com.simon.progexam.entity.Reading;
 import com.simon.progexam.repository.ReadingRepository;
-import lombok.Locked;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

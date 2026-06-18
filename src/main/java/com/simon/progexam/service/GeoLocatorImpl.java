@@ -1,11 +1,9 @@
 package com.simon.progexam.service;
 
 import com.simon.progexam.DTO.GeoLocationDTO;
-import com.simon.progexam.service.GeoLocator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
 @RequiredArgsConstructor

@@ -4,11 +4,9 @@ import com.simon.progexam.entity.*;
 import com.simon.progexam.repository.EarthquakeWarningRepository;
 import com.simon.progexam.repository.ReadingRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 // Ansvar: Opretter jordskælvsvarsler og kobler sensormålinger til dem
