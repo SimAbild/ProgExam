@@ -28,8 +28,8 @@ public class Reading {
     private Sensor sensor;
 
     @ManyToOne
-    @JoinColumn(name = "warning_id")
-    private EarthquakeWarning warning;
+    @JoinColumn(name = "earthquake_warning_id")
+    private EarthquakeWarning earthquakeWarning;
 
 
 
