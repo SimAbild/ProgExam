@@ -2,6 +2,7 @@ package com.simon.progexam.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -29,7 +30,7 @@ public class SecurityConfig {
 
                         // USER endpoints
                         .requestMatchers("/api/warnings/active").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/api/warnings/*/reports").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/api/warnings/*/reports").hasAnyRole("USER", "ADMIN")
 
                         // ADMIN endpoints
                         .requestMatchers("/api/sensor-data").hasRole("ADMIN")
@@ -37,6 +38,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/warnings/*/status").hasRole("ADMIN")
                         .requestMatchers("/api/warnings/*/reports/count").hasRole("ADMIN")
                         .requestMatchers("/api/warnings/*/readings").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/api/warnings/*/reports").hasAnyRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )

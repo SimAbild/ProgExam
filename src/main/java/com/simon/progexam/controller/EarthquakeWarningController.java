@@ -55,7 +55,7 @@ public class EarthquakeWarningController {
         return earthquakeWarningService.findAllActiveEarthquakeWarnings();
     }
 
-    @PostMapping("/warnings/{id}")
+    @PostMapping("/warnings/{id}/status")
     public ResponseEntity<EarthquakeWarning> changeEarthquakeWarningStatus(@PathVariable Integer id, @RequestBody EarthquakeWarningStatusDTO status){
         EarthquakeWarning earthquakeWarning = earthquakeWarningService.changeEarthquakeWarningStatus(id, status.getStatus());
         return ResponseEntity.ok(earthquakeWarning);
