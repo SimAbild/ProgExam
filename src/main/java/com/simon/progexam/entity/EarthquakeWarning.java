@@ -28,4 +28,6 @@ public class EarthquakeWarning {
     private double magnitude;
 
     private LocalDateTime createdAt;
+
+    private String geoLocationName;
 }
