@@ -21,7 +21,7 @@ function showUserPanel() {
 function loadActiveWarnings(){
     fetchActiveWarnings(credentials)
         .then(data => {
-            document.getElementById("all-warnings").textContent = JSON.stringify(data, null, 2);
+            document.getElementById("active-warnings").textContent = JSON.stringify(data, null, 2);
         });
 }
 
