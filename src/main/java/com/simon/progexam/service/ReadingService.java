@@ -18,7 +18,7 @@ public class ReadingService {
 
     public List<ReadingResponseDTO> findReadings(){
         List<Reading> readings = readingRepository.findAll();
-        List<ReadingResponseDTO> readingResponseDtos = new ArrayList<>();
+        List<ReadingResponseDTO> readingResponses = new ArrayList<>();
 
         for (Reading reading : readings){
             ReadingResponseDTO readingResponseDTO = new ReadingResponseDTO();
@@ -28,9 +28,9 @@ public class ReadingService {
             readingResponseDTO.setEstimatedMagnitude(reading.getEstimatedMagnitude());
             readingResponseDTO.setRecordedAt(reading.getRecordedAt());
 
-           readingResponseDtos.add(readingResponseDTO);
+           readingResponses.add(readingResponseDTO);
         }
-        return readingResponseDtos;
+        return readingResponses;
 
     }
 

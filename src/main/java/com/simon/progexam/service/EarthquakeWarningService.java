@@ -7,14 +7,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 // Ansvar: Opretter jordskælvsvarsler og kobler sensormålinger til dem
 @Service
 @RequiredArgsConstructor
-public class WarningService {
+public class EarthquakeWarningService {
 
-    private final EarthquakeWarningRepository warningRepository;
+    private final EarthquakeWarningRepository earthquakeWarningRepository;
     private final ReadingRepository readingRepository;
     private final EpicenterCalculator epicenterCalculator;
 
@@ -23,7 +24,7 @@ public class WarningService {
         double magnitude = averageMagnitude(readings);
 
         EarthquakeWarning warning = buildWarning(epicenter, magnitude);
-        EarthquakeWarning saved = warningRepository.save(warning);
+        EarthquakeWarning saved = earthquakeWarningRepository.save(warning);
 
         linkReadingsToWarning(readings, saved);
     }
@@ -51,5 +52,19 @@ public class WarningService {
             reading.setEarthquakeWarning(warning);
             readingRepository.save(reading);
         }
+    }
+
+    public EarthquakeWarning findEarthquakeWarningById(Integer id){
+        EarthquakeWarning earthquakeWarning = earthquakeWarningRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Varsel ikke fundet"));
+        return earthquakeWarning;
+    }
+
+    public List<EarthquakeWarning> findAllEarthquakeWarnings(){
+        return earthquakeWarningRepository.findAll();
+    }
+
+    public List<EarthquakeWarning> findAllActiveEarthquakeWarnings(){
+        return earthquakeWarningRepository.findByStatus(EarthquakeWarningStatus.ACTIVE);
     }
 }

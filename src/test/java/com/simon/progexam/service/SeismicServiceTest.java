@@ -29,7 +29,7 @@ class SeismicServiceTest {
     private ReadingRepository readingRepository;
 
     @Mock
-    private WarningService warningService;
+    private EarthquakeWarningService earthquakeWarningService;
 
     @InjectMocks
     private SeismicService seismicService;
@@ -90,7 +90,7 @@ class SeismicServiceTest {
 
         seismicService.processReadings(List.of(buildDto("s1"), buildDto("s2"), buildDto("s3")));
 
-        verify(warningService).createWarning(any());
+        verify(earthquakeWarningService).createWarning(any());
     }
 
     @Test
@@ -100,6 +100,6 @@ class SeismicServiceTest {
 
         seismicService.processReadings(List.of(buildDto("s1"), buildDto("s2")));
 
-        verify(warningService, never()).createWarning(any());
+        verify(earthquakeWarningService, never()).createWarning(any());
     }
 }

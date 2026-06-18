@@ -15,7 +15,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class WarningServiceTest {
+class EarthquakeWarningServiceTest {
 
     @Mock
     private EarthquakeWarningRepository warningRepository;
@@ -27,7 +27,7 @@ class WarningServiceTest {
     private EpicenterCalculator epicenterCalculator;
 
     @InjectMocks
-    private WarningService warningService;
+    private EarthquakeWarningService earthquakeWarningService;
 
     private Reading buildReading(double magnitude) {
         Sensor sensor = new Sensor();
@@ -45,7 +45,7 @@ class WarningServiceTest {
         when(epicenterCalculator.calculate(any())).thenReturn(new EpicenterLocation(55.0, 12.0));
         when(warningRepository.save(any())).thenAnswer(i -> i.getArgument(0));
 
-        warningService.createWarning(List.of(buildReading(4.0), buildReading(4.0), buildReading(4.0)));
+        earthquakeWarningService.createWarning(List.of(buildReading(4.0), buildReading(4.0), buildReading(4.0)));
 
         verify(warningRepository).save(argThat(warning ->
                 warning.getStatus() == EarthquakeWarningStatus.UNDER_REVIEW
@@ -58,7 +58,7 @@ class WarningServiceTest {
         EarthquakeWarning savedWarning = new EarthquakeWarning();
         when(warningRepository.save(any())).thenReturn(savedWarning);
 
-        warningService.createWarning(List.of(buildReading(4.0), buildReading(4.0), buildReading(4.0)));
+        earthquakeWarningService.createWarning(List.of(buildReading(4.0), buildReading(4.0), buildReading(4.0)));
 
         verify(readingRepository, times(3)).save(any(Reading.class));
     }
@@ -68,7 +68,7 @@ class WarningServiceTest {
         when(epicenterCalculator.calculate(any())).thenReturn(new EpicenterLocation(55.0, 12.0));
         when(warningRepository.save(any())).thenAnswer(i -> i.getArgument(0));
 
-        warningService.createWarning(List.of(buildReading(3.0), buildReading(4.0), buildReading(5.0)));
+        earthquakeWarningService.createWarning(List.of(buildReading(3.0), buildReading(4.0), buildReading(5.0)));
 
         verify(warningRepository).save(argThat(warning ->
                 warning.getMagnitude() == 4.0

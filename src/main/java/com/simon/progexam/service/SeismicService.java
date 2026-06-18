@@ -17,7 +17,7 @@ public class SeismicService {
 
     private final SensorRepository sensorRepository;
     private final ReadingRepository readingRepository;
-    private final WarningService warningService;
+    private final EarthquakeWarningService earthquakeWarningService;
 
     public void processReadings(List<SensorReadingDTO> dtos) {
         List<Reading> savedReadings = new ArrayList<>();
@@ -28,7 +28,7 @@ public class SeismicService {
         }
 
         if (dtos.size() == 3) {
-            warningService.createWarning(savedReadings);
+            earthquakeWarningService.createWarning(savedReadings);
         }
     }
 
