@@ -20,4 +20,7 @@ public class SeismicController {
         seismicService.processReadings(readings);
         return ResponseEntity.ok("Readings processed");
     }
+
+    @GetMapping("/sensor-data")
+    public SensorReadingDTO
 }

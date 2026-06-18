@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+// Ansvar: Modtager og behandler indkommende sensordata fra Docker-containeren
 @Service
 @RequiredArgsConstructor
 public class SeismicService {
@@ -47,7 +48,7 @@ public class SeismicService {
     private Reading buildReading(SensorReadingDTO dto, Sensor sensor) {
         Reading reading = new Reading();
         reading.setSensor(sensor);
-        reading.setEstimatedDistance(dto.getEstimatedDistanceToEpicenterKm());
+        reading.setEstimatedDistanceToEpicenterKm(dto.getEstimatedDistanceToEpicenterKm());
         reading.setEstimatedMagnitude(dto.getEstimatedMagnitude());
         reading.setRecordedAt(dto.getRecordedAt() != null ? dto.getRecordedAt() : LocalDateTime.now());
         return reading;

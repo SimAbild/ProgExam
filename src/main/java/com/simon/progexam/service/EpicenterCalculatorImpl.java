@@ -27,7 +27,7 @@ public class EpicenterCalculatorImpl implements EpicenterCalculator {
             double lonRad = Math.toRadians(s.getLongitude());
             x[i] = EARTH_RADIUS_KM * (lonRad - refLonRad) * Math.cos(refLatRad);
             y[i] = EARTH_RADIUS_KM * (latRad - refLatRad);
-            d[i] = readings.get(i).getEstimatedDistance();
+            d[i] = readings.get(i).getEstimatedDistanceToEpicenterKm();
         }
 
         double[] epicenterXY = solveLinearSystem(x, y, d);

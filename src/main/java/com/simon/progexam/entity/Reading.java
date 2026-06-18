@@ -17,7 +17,7 @@ public class Reading {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private double estimatedDistance;
+    private double estimatedDistanceToEpicenterKm;
 
     private double estimatedMagnitude;
 

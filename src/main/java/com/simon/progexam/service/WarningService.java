@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+// Ansvar: Opretter jordskælvsvarsler og kobler sensormålinger til dem
 @Service
 @RequiredArgsConstructor
 public class WarningService {
