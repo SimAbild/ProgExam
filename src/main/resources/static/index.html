@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>SeismicMonitor Admin</title>
+</head>
+<body>
+<h1>SeismicMonitor Admin</h1>
+
+<h2>Alle jordskælvsvarsler</h2>
+<button onclick="loadWarnings()">Hent varsler</button>
+<pre id="warnings"></pre>
+
+<script>
+    const adminCredentials = btoa("admin:admin123");
+
+    function loadWarnings() {
+        fetch("/api/warnings", {
+            headers: { "Authorization": "Basic " + adminCredentials }
+        })
+            .then(r => r.json())
+            .then(data => document.getElementById("warnings").textContent = JSON.stringify(data, null, 2));
+    }
+</script>
+</body>
+</html>
