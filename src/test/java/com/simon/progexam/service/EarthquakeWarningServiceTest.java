@@ -26,6 +26,9 @@ class EarthquakeWarningServiceTest {
     @Mock
     private EpicenterCalculator epicenterCalculator;
 
+    @Mock
+    private GeoLocator geoLocator;
+
     @InjectMocks
     private EarthquakeWarningService earthquakeWarningService;
 

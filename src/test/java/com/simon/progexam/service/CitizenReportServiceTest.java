@@ -47,7 +47,7 @@ class CitizenReportServiceTest {
     @Test
     void showCitizenReportsByEarthquakeWarning_returnsCorrectCount() {
         EarthquakeWarning warning = new EarthquakeWarning();
-        when(citizenReportRepository.findByEarthquakeWarning(warning)).thenReturn(List.of(new CitizenReport(), new CitizenReport()));
+        when(citizenReportRepository.countByEarthquakeWarning(warning)).thenReturn(2);
 
         Integer count = citizenReportService.showCitizenReportsByEarthquakeWarning(warning);
 
