@@ -42,7 +42,7 @@ function showAdminPanel() {
         <button onclick="toggleSection('report-count')">Skjul/Vis</button>
         <pre id="report-count"></pre>
         
-        <h3>Se målinger ført til varsel</h3>
+        <h3>Se målinger ført til specifikt varsel</h3>
         <input type="number" id="warning-id-readings" placeholder="Varsel ID">
         <button onclick="loadAllReadingsBySpecificEarthquakeWarning()">Se målinger</button>
         <button onclick="toggleSection('readings-for-warnings')">Skjul/Vis</button>
@@ -99,9 +99,9 @@ function updateWarningStatus(){
     const status = document.getElementById("new-status").value;
     const id = document.getElementById("warning-id").value;
 
-    fetchChangeEarthquakeWarningStatus(id, status)
+    fetchChangeEarthquakeWarningStatus(credentials, id, status)
         .then(data => {
-            document.getElementById("status-result").textContent = JSON.stringify(data, null, 2);
+            document.getElementById("status-result").textContent = "Status opdateret! " + JSON.stringify(data, null, 2);
         });
 }
 

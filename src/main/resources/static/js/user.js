@@ -29,9 +29,9 @@ function submitCitizenReport(){
     const id = document.getElementById("report-warning-id").value
     const intensity = document.getElementById("report-intensity").value
 
-    fetchCreateCitizenReport(id, intensity)
+    fetchCreateCitizenReport(credentials, id, intensity)
         .then(data => {
-            document.getElementById("report-result").textContent = JSON.stringify(data, null, 2);
+            document.getElementById("report-result").textContent = "Rapport oprettet! " + JSON.stringify(data, null, 2);
         });
 
 }
