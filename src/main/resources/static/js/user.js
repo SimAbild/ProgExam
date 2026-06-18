@@ -19,7 +19,7 @@ function showUserPanel() {
 }
 
 function loadActiveWarnings(){
-    fetchActiveWarnings(credentials)
+    fetchActiveWarnings()
         .then(data => {
             document.getElementById("active-warnings").textContent = JSON.stringify(data, null, 2);
         });
@@ -29,7 +29,7 @@ function submitCitizenReport(){
     const id = document.getElementById("report-warning-id").value
     const intensity = document.getElementById("report-intensity").value
 
-    fetchCreateCitizenReport(credentials, id, intensity)
+    fetchCreateCitizenReport(id, intensity)
         .then(data => {
             document.getElementById("report-result").textContent = JSON.stringify(data, null, 2);
         });

@@ -9,5 +9,6 @@ import java.util.List;
 public interface CitizenReportRepository extends JpaRepository<CitizenReport,Integer> {
 
     List<CitizenReport> findByEarthquakeWarning(EarthquakeWarning earthquakeWarning);
+    Integer countByEarthquakeWarning(EarthquakeWarning earthquakeWarning);
 
 }

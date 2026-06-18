@@ -3,11 +3,8 @@ package com.simon.progexam.service;
 import com.simon.progexam.entity.CitizenReport;
 import com.simon.progexam.entity.EarthquakeWarning;
 import com.simon.progexam.repository.CitizenReportRepository;
-import com.simon.progexam.repository.EarthquakeWarningRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 // Ansvar: Håndterer brugerrapporteringer
@@ -26,7 +23,7 @@ public class CitizenReportService {
     }
 
     public Integer showCitizenReportsByEarthquakeWarning(EarthquakeWarning earthquakeWarning){
-        Integer citizenReports = citizenReportRepository.findByEarthquakeWarning(earthquakeWarning).size();
+        Integer citizenReports = citizenReportRepository.countByEarthquakeWarning(earthquakeWarning);
         return citizenReports;
 
     }

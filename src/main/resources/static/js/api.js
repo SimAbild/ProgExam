@@ -1,40 +1,39 @@
 const BACKEND_URL = "http://localhost:8080";
 
-function fetchAllWarnings(credentials) {
-    return fetch(BACKEND_URL + "/api/warnings", {
-        headers: { "Authorization": "Basic " + credentials }
-    }).then(response => response.json());
-}
-
-function fetchActiveWarnings(credentials) {
-    return fetch(BACKEND_URL + "/api/warnings/active", {
+function get(url) {
+    return fetch(BACKEND_URL + url, {
         headers: {"Authorization": "Basic " + credentials}
     }).then(response => response.json());
 }
 
-function fetchAllReadings(credentials) {
-    return fetch(BACKEND_URL + "/api/sensor-reading-data", {
-        headers: {"Authorization": "Basic " + credentials}
-    }).then(response => response.json());
+function fetchAllWarnings() {
+    return get("/api/warnings");
 }
 
-function fetchAllReadingsBySpecificEarthquakeWarning(credentials, id) {
-    return fetch(BACKEND_URL + "/api/warnings/" + id + "/readings", {
-        headers: {"Authorization": "Basic " + credentials}
-    }).then(response => response.json());
+function fetchActiveWarnings() {
+    return get("/api/warnings/active");
 }
 
-function fetchCitizenReportsByEarthquakeWarning(credentials, id) {
-    return fetch(BACKEND_URL + "/api/warnings/" + id + "/reports/count", {
-        headers: {"Authorization": "Basic " + credentials}
-    }).then(response => response.json());
+function fetchAllReadings() {
+    return get("/api/sensor-reading-data");
 }
 
-function fetchCitizenReportByEarthquakeWarning(credentials, id) {
-    return fetch(BACKEND_URL + "/api/warnings/" + id + "/reports", {
-        headers: {"Authorization": "Basic " + credentials}
-    }).then(response => response.json());
+function fetchAllReadingsBySpecificEarthquakeWarning(id) {
+    return get("/api/warnings/" + id + "/readings");
 }
+
+function fetchCitizenReportsByEarthquakeWarning(id) {
+    return get("/api/warnings/" + id + "/reports/count");
+}
+
+function fetchCitizenReportByEarthquakeWarning( id) {
+    return get("/api/warnings/" + id + "/reports");
+}
+
+function fetchAllCitizenReports() {
+    return get("/api/warnings/reports");
+}
+
 
 function fetchChangeEarthquakeWarningStatus(credentials, id, status) {
     return fetch(BACKEND_URL + "/api/warnings/" + id + "/status", {
@@ -58,8 +57,3 @@ function fetchCreateCitizenReport(credentials, id, intensity) {
     }).then(response => response.json());
 }
 
-function fetchAllCitizenReports(credentials) {
-    return fetch(BACKEND_URL + "/api/warnings/reports", {
-        headers: {"Authorization": "Basic " + credentials}
-    }).then(response => response.json());
-}

@@ -51,7 +51,7 @@ function showAdminPanel() {
 }
 
 function loadAllCitizenReports(){
-    fetchAllCitizenReports(credentials)
+    fetchAllCitizenReports()
         .then(data => {
             document.getElementById("all-citizen-reports").textContent = JSON.stringify(data, null, 2);
         });
@@ -59,21 +59,21 @@ function loadAllCitizenReports(){
 
 function loadCitizenReportCountByWarning() {
     const id = document.getElementById("warning-id-count").value;
-    fetchCitizenReportsByEarthquakeWarning(credentials, id)
+    fetchCitizenReportsByEarthquakeWarning(id)
         .then(data => {
             document.getElementById("report-count").textContent = JSON.stringify(data, null, 2);
         });
 }
 
 function loadSensorReadings(){
-fetchAllReadings(credentials)
+fetchAllReadings()
     .then(data => {
         document.getElementById("sensor-readings").textContent = JSON.stringify(data, null, 2);
     });
 }
 
 function loadAllWarnings() {
-    fetchAllWarnings(credentials)
+    fetchAllWarnings()
         .then(data => {
             document.getElementById("all-warnings").textContent = JSON.stringify(data, null, 2);
         });
@@ -81,7 +81,7 @@ function loadAllWarnings() {
 
 function loadAllReadingsBySpecificEarthquakeWarning() {
     const id = document.getElementById("warning-id-readings").value;
-    fetchAllReadingsBySpecificEarthquakeWarning(credentials, id)
+    fetchAllReadingsBySpecificEarthquakeWarning(id)
         .then(data => {
             document.getElementById("readings-for-warnings").textContent = JSON.stringify(data, null, 2);
         });
@@ -89,7 +89,7 @@ function loadAllReadingsBySpecificEarthquakeWarning() {
 
 function loadCitizenReportByEarthquakeWarning() {
     const id = document.getElementById("warning-id-reports").value
-    fetchCitizenReportByEarthquakeWarning(credentials, id)
+    fetchCitizenReportByEarthquakeWarning(id)
         .then(data => {
             document.getElementById("all-reports").textContent = JSON.stringify(data, null, 2);
         });
@@ -99,7 +99,7 @@ function updateWarningStatus(){
     const status = document.getElementById("new-status").value;
     const id = document.getElementById("warning-id").value;
 
-    fetchChangeEarthquakeWarningStatus(credentials,id, status)
+    fetchChangeEarthquakeWarningStatus(id, status)
         .then(data => {
             document.getElementById("status-result").textContent = JSON.stringify(data, null, 2);
         });

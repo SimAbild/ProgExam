@@ -34,7 +34,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/warnings/*/reports").hasAnyRole("USER", "ADMIN")
 
                         // ADMIN endpoints
-                        .requestMatchers("/api/sensor-data").hasRole("ADMIN")
+                        .requestMatchers("/api/sensor-reading-data").hasRole("ADMIN")
                         .requestMatchers("/api/warnings").hasRole("ADMIN")
                         .requestMatchers("/api/warnings/*/status").hasRole("ADMIN")
                         .requestMatchers("/api/warnings/*/reports/count").hasRole("ADMIN")
