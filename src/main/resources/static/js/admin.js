@@ -101,7 +101,17 @@ function updateWarningStatus(){
 
     fetchChangeEarthquakeWarningStatus(credentials, id, status)
         .then(data => {
-            document.getElementById("status-result").textContent = "Status opdateret! " + JSON.stringify(data, null, 2);
+            if (data.status === 500) {
+                if (status === "NOT_ACTIVE") {
+                    document.getElementById("status-result").textContent = "Fejl: Varsler under behandling kan ikke sættes til NOT_ACTIVE. Sæt dem først til ACTIVE.";
+                } else if (status === "ACTIVE" || status === "FALSE_ALARM") {
+                    document.getElementById("status-result").textContent = "Fejl: Varslet kan ikke skifte til " + status + " fra sin nuværende status.";
+                } else {
+                    document.getElementById("status-result").textContent = "Fejl: Ugyldigt statusskift.";
+                }
+            } else {
+                document.getElementById("status-result").textContent = "Status opdateret! " + JSON.stringify(data, null, 2);
+            }
         });
 }
 
