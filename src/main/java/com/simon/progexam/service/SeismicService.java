@@ -67,19 +67,43 @@ public class SeismicService {
     }
 
     private double[] calculateEpicenter(List<Reading> readings) {
-        // Weighted average: sensors closer to epicenter (smaller distance) weigh more
-        double totalWeight = 0;
-        double weightedLat = 0;
-        double weightedLon = 0;
+        Sensor ref = readings.get(0).getSensor();
+        double refLatRad = Math.toRadians(ref.getLatitude());
+        double refLonRad = Math.toRadians(ref.getLongitude());
+        double earthRadius = 6371.0;
 
-        for (Reading r : readings) {
-            double distance = r.getEstimatedDistance();
-            double weight = (distance > 0) ? 1.0 / distance : 1.0;
-            weightedLat += r.getSensor().getLatitude() * weight;
-            weightedLon += r.getSensor().getLongitude() * weight;
-            totalWeight += weight;
+        double[] x = new double[3];
+        double[] y = new double[3];
+        double[] d = new double[3];
+
+        for (int i = 0; i < 3; i++) {
+            Sensor s = readings.get(i).getSensor();
+            double latRad = Math.toRadians(s.getLatitude());
+            double lonRad = Math.toRadians(s.getLongitude());
+            x[i] = earthRadius * (lonRad - refLonRad) * Math.cos(refLatRad);
+            y[i] = earthRadius * (latRad - refLatRad);
+            d[i] = readings.get(i).getEstimatedDistance();
         }
 
-        return new double[]{weightedLat / totalWeight, weightedLon / totalWeight};
+        double A = 2 * (x[1] - x[0]);
+        double B = 2 * (y[1] - y[0]);
+        double C = d[0]*d[0] - d[1]*d[1] - x[0]*x[0] + x[1]*x[1] - y[0]*y[0] + y[1]*y[1];
+
+        double D = 2 * (x[2] - x[1]);
+        double E = 2 * (y[2] - y[1]);
+        double F = d[1]*d[1] - d[2]*d[2] - x[1]*x[1] + x[2]*x[2] - y[1]*y[1] + y[2]*y[2];
+
+        double denominator = A * E - B * D;
+        if (Math.abs(denominator) < 1e-12) {
+            throw new IllegalArgumentException("Målepunkterne giver ingen stabil løsning.");
+        }
+
+        double epicenterX = (C * E - B * F) / denominator;
+        double epicenterY = (A * F - C * D) / denominator;
+
+        double epicenterLatRad = refLatRad + epicenterY / earthRadius;
+        double epicenterLonRad = refLonRad + epicenterX / (earthRadius * Math.cos(refLatRad));
+
+        return new double[]{Math.toDegrees(epicenterLatRad), Math.toDegrees(epicenterLonRad)};
     }
 }
