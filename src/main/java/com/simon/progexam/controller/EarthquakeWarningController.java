@@ -1,10 +1,13 @@
 package com.simon.progexam.controller;
 
 import com.simon.progexam.DTO.CitizenReportDTO;
+import com.simon.progexam.DTO.EarthquakeWarningStatusDTO;
 import com.simon.progexam.entity.CitizenReport;
 import com.simon.progexam.entity.EarthquakeWarning;
+import com.simon.progexam.entity.Reading;
 import com.simon.progexam.service.CitizenReportService;
 import com.simon.progexam.service.EarthquakeWarningService;
+import com.simon.progexam.service.ReadingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,7 @@ import java.util.List;
 public class EarthquakeWarningController {
     private final CitizenReportService citizenReportService;
     private final EarthquakeWarningService earthquakeWarningService;
+    private final ReadingService readingService;
 
     @PostMapping("/warnings/{id}/reports")
     public ResponseEntity<CitizenReport>createCitizenReport(@PathVariable Integer id, @RequestBody CitizenReportDTO citizenReportDTO){
@@ -49,5 +53,17 @@ public class EarthquakeWarningController {
     @GetMapping("/warnings/active")
     public List<EarthquakeWarning> showAllActiveEarthquakeWarnings(){
         return earthquakeWarningService.findAllActiveEarthquakeWarnings();
+    }
+
+    @PostMapping("/warnings/{id}")
+    public ResponseEntity<EarthquakeWarning> changeEarthquakeWarningStatus(@PathVariable Integer id, @RequestBody EarthquakeWarningStatusDTO status){
+        EarthquakeWarning earthquakeWarning = earthquakeWarningService.changeEarthquakeWarningStatus(id, status.getStatus());
+        return ResponseEntity.ok(earthquakeWarning);
+    }
+
+    @GetMapping("/warnings/{id}/readings")
+    public List<Reading> showAllReadingsBySpecificEarthquakeWarning(@PathVariable Integer id){
+       EarthquakeWarning earthquakeWarning = earthquakeWarningService.findEarthquakeWarningById(id);
+        return readingService.findAllReadingsBySpecificEarthquakeWarning(earthquakeWarning);
     }
 }
