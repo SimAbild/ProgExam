@@ -3,10 +3,6 @@ package com.simon.progexam.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 @Data
 @Entity
 public class CitizenReport {
@@ -16,6 +12,8 @@ public class CitizenReport {
     private Integer id;
 
     private double intensity;
+
+    private String username;
 
     @ManyToOne
     @JoinColumn(name = "earthquake_warning_id")

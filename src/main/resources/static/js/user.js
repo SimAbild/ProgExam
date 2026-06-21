@@ -31,7 +31,11 @@ function submitCitizenReport(){
 
     fetchCreateCitizenReport(credentials, id, intensity)
         .then(data => {
-            document.getElementById("report-result").textContent = "Rapport oprettet! " + JSON.stringify(data, null, 2);
+            if (data.status === 500) {
+                document.getElementById("report-result").textContent = "Fejl: Du har allerede oprettet en rapport for dette varsel.";
+            } else {
+                document.getElementById("report-result").textContent = "Rapport oprettet! " + JSON.stringify(data, null, 2);
+            }
         });
 
 }

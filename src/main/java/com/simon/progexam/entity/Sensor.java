@@ -3,10 +3,7 @@ package com.simon.progexam.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+
 @Data
 @Entity
 public class Sensor {

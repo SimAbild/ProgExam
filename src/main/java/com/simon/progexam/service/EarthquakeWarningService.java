@@ -5,6 +5,7 @@ import com.simon.progexam.repository.EarthquakeWarningRepository;
 import com.simon.progexam.repository.ReadingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,12 +21,14 @@ public class EarthquakeWarningService {
     private final EpicenterCalculator epicenterCalculator;
     private final GeoLocator geoLocator;
 
+    @Transactional
     public void createWarning(List<Reading> readings) {
         EpicenterLocation epicenter = epicenterCalculator.calculate(readings);
         double magnitude = averageMagnitude(readings);
 
         EarthquakeWarning warning = buildWarning(epicenter, magnitude);
         String geoLocationName = geoLocator.locate(epicenter.getLatitude(), epicenter.getLongitude());
+
         warning.setGeoLocationName(geoLocationName);
         EarthquakeWarning saved = earthquakeWarningRepository.save(warning);
 

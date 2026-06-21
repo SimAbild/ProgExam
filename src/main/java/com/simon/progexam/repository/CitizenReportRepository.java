@@ -10,5 +10,7 @@ public interface CitizenReportRepository extends JpaRepository<CitizenReport,Int
 
     List<CitizenReport> findByEarthquakeWarning(EarthquakeWarning earthquakeWarning);
     Integer countByEarthquakeWarning(EarthquakeWarning earthquakeWarning);
+    boolean existsByEarthquakeWarningAndUsername(EarthquakeWarning earthquakeWarning, String username);
+
 
 }

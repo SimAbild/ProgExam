@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -23,9 +24,9 @@ public class EarthquakeWarningController {
     private final ReadingService readingService;
 
     @PostMapping("/warnings/{id}/reports")
-    public ResponseEntity<CitizenReport>createCitizenReport(@PathVariable Integer id, @RequestBody CitizenReportDTO citizenReportDTO){
+    public ResponseEntity<CitizenReport>createCitizenReport(Principal principal, @PathVariable Integer id, @RequestBody CitizenReportDTO citizenReportDTO){
         EarthquakeWarning earthquakeWarning = earthquakeWarningService.findEarthquakeWarningById(id);
-        CitizenReport createCitizenReport = citizenReportService.createCitizenReport(citizenReportDTO.getIntensity(), earthquakeWarning);
+        CitizenReport createCitizenReport = citizenReportService.createCitizenReport(citizenReportDTO.getIntensity(), earthquakeWarning, principal.getName());
 
         return ResponseEntity.ok(createCitizenReport);
     }
