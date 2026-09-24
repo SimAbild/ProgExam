@@ -2,11 +2,21 @@
 
 An earthquake early-warning system built with **Spring Boot**. The application receives readings from seismic sensors, calculates the earthquake's epicenter from three readings, and creates a warning that administrators can review and citizens can report on.
 
-Built as an individual programming exam project at the Computer Science AP Degree (Datamatiker), KEA Copenhagen, 3rd semester.
+Built as an individual programming exam project at the Computer Science AP Degree (Datamatiker), Erhvervsakademi København (EK), 3rd semester.
 
 <!-- Add a screenshot of the admin or user view here:
 ![Screenshot](docs/screenshot.png)
 -->
+
+## Purpose
+
+The exam tested whether I could build a complete, secured backend on my own under time pressure. A provided Docker container simulates a network of seismic sensors, and my job was to build the system that receives the data and turns it into useful warnings:
+
+- design a **REST API** that other systems (the sensors) can post data to
+- model the domain with **JPA entities and relationships** (sensors, readings, warnings, reports)
+- implement a real **algorithm** (trilateration) in the service layer and **unit test** it
+- secure the API with **role-based access** (Spring Security)
+- **integrate an external API** (OpenStreetMap) for reverse geocoding
 
 ## Features
 
